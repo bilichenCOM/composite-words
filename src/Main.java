@@ -16,8 +16,8 @@ public class Main {
         List<String> words = Files.readAllLines(Paths.get(FILE), UTF_8);
 
         Solver solver = new Solver(words);
-        String longestCompositeWord = solver.findLongestCompositeWord();
-        String secondLongest = solver.findSecondLongestCompostieWord();
+        String longestCompositeWord = solver.findNLongestCompositeWord(1);
+        String secondLongest = solver.findNLongestCompositeWord(2);
         int countOfConcatenatedWords = solver.getCountConcatenatedWords();
 
         StringBuilder output = new StringBuilder();
