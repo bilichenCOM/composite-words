@@ -1,8 +1,10 @@
 package com.bilichenko.test.composite_words;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -10,28 +12,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CompositeWordsTest {
 
-    private static final List<String> TEST_WORDS = asList("cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat");
+    private static final List<String> TEST_WORDS;
 
-    private static CompositeWords compositeWords;
+    static {
+        TEST_WORDS = asList("cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat");
+    }
 
-    @BeforeEach
-    void initTestObject() {
-        compositeWords = new CompositeWords(TEST_WORDS);
+    @BeforeAll
+    static void sortList() {
+        Collections.sort(TEST_WORDS, Comparator.comparing(String::length));
     }
 
     @Test
-    void getNLongestCompositeWord() {
-        assertEquals("ratcatdogcat", compositeWords.getNLongestCompositeWord(1));
-        assertEquals("catsdogcats", compositeWords.getNLongestCompositeWord(2));
-    }
+    void retrieveCompositeWords() {
+        List<String> expected = asList("dogcatsdog", "catsdogcats", "ratcatdogcat");
 
-    @Test
-    void getCountConcatenatedWords() {
-        assertEquals(3, compositeWords.getCountConcatenatedWords());
-    }
+        List<String> actual = CompositeWords.retrieveCompositeWords(TEST_WORDS);
 
-    @Test
-    void removeComposite() {
-        //TODO: implement tests for this method;
+        assertEquals(expected, actual);
     }
 }
