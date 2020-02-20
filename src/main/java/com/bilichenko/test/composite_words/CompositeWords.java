@@ -7,8 +7,8 @@ import java.util.List;
 public class CompositeWords {
 
     // this method return only those words,
-    // which cannot be represented as concatenation
-    // of another words presented in input list;
+    // which are concatenation of other words
+    // in input list
     public static List<String> retrieveCompositeWords(List<String> sortedWords) {
         List<String> compositeWords = new ArrayList<>();
         List<String> strongWords = new ArrayList<>();
